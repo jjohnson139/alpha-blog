@@ -8,16 +8,28 @@
       <%= link_to "Articles", articles_path %>
     </li>
     <li class="nav-item">
-      <%= link_to 'Log out', logout_path, method: :delete %>
+      <%= link_to "Users", users_path %>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
-      <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
-        <%= link_to "New Article", new_article_path %>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </li>
+    <% if logged_in? %>
+      <li class="nav-item">
+        <%= link_to 'Log out', logout_path, method: :delete %>temp@example.com
+        
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile</a>
+        <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+          <%= link_to "New Article", new_article_path %>
+          <%= link_to "Edit your profile", edit_user_path(current_user) %>
+          <%= link_to "View your profile", user_path(current_user) %>
+        </div>
+      </li>
+      <% else %>
+
+      <li><%= link_to 'Log in', login_path %></li>
+
+      <li><%= link_to 'Sign up', signup_path %></li>
+      <% end %>
+
   </ul>
   <form class="form-inline float-xs-right">
     <input class="form-control" type="text" placeholder="Search">
